@@ -26,10 +26,6 @@ steps:
     - master
     - main
 
-trigger:
-  event:
-    exclude:
-    - pull_request
 - name: Suzieq Check
   image: python:3.8
   commands:
@@ -47,3 +43,7 @@ volumes:
 - name: suzieq
   host:
     path: /home/neteng/suz
+trigger:
+  event:
+    exclude:
+    - pull_request
