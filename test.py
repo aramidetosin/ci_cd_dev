@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-
-"""Script used to test the network with batfish"""
-
 from pybatfish.client.commands import *
 from pybatfish.question import load_questions
 from pybatfish.client.asserts import (
@@ -11,8 +7,7 @@ from pybatfish.client.asserts import (
     assert_no_unestablished_bgp_sessions,
     assert_no_undefined_references,
 )
-from rich.console import Console
-
+from rich import print as rprint
 
 def test_duplicate_rtr_ids(snap):
     """Testing for duplicate router IDs"""
@@ -20,7 +15,6 @@ def test_duplicate_rtr_ids(snap):
         snapshot=snap,
         protocols={"ospf", "bgp"},
     )
-
 
 def main():
     """init all the things"""
