@@ -4,17 +4,29 @@ name: Testing Python CI/CD
 
 
 steps:
-- name: Install and deploy
-  image: python
+- name: Black Code Format Check
+  image: aoluwatosin10/netauto
+  commands:
+  - black . --check
+
+- name: Precheck OSPF and BGP
+  image: aoluwatosin10/netauto
+  commands:
+  - pytest test.py --disable-pytest-warnings -s
+
+- name: Deploy Configurations
+  image: aoluwatosin10/netauto
   environment:
     MY_PASS:
       from_secret: MY_PASS
   commands:
-  - pip3 install -r requirements.txt
-  - python3 bat.py
+  - python build.py
+  when:
+    branch:
+    - master
+    - main
 
 trigger:
-  branch:
+  event:
     exclude:
-    - main
-    - master
+    - pull_request
