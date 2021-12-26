@@ -20,14 +20,14 @@ username suzie privilege 15 role network-admin secret sha512 $6$6zV.qw9F48hskMAL
 vrf instance MGMT
 !
 interface Ethernet1
-   description connection to pdx-rtr-eos-01
+   description connection pdx-rtr-eos-02 Eth1 <> pdx-rtr-eos-01 Eth1
    no switchport
    ip address 10.0.12.2/24
    ip ospf network point-to-point
    ip ospf area 0.0.0.0
 !
 interface Ethernet2
-   description connection to pdx-rtr-eos-03
+   description connection pdx-rtr-eos-02 Eth2 <> pdx-rtr-eos-03 Eth2
    no switchport
    ip address 10.0.23.2/24
    ip ospf network point-to-point
