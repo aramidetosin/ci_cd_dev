@@ -24,7 +24,7 @@ def test_duplicate_rtr_ids(snap):
 
 def main():
     """init all the things"""
-    NETWORK_NAME = "PDX_NET"
+    NETWORK_NAME = "EOS_NET"
     SNAPSHOT_NAME = "snapshot00"
     SNAPSHOT_DIR = "./snapshots"
     bf_session.host = "192.168.7.45"

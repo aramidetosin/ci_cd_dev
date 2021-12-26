@@ -1,0 +1,78 @@
+! Command: show running-config
+! device: pdx-rtr-eos-04 (vEOS, EOS-4.26.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname pdx-rtr-eos-04
+!
+spanning-tree mode mstp
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$iyIZMJHFsD2Xa4A9$hiHiHzQo4WR//xWHpaKLJZbblpjWn7InfgfEHze2iW/9NfDyEU6usgBoE6vQF60Blhv9vUaIhqbXVswtiNam31
+username neteng privilege 15 role network-admin secret sha512 $6$MqChj65lMkFq3nag$LoHLhbN3nTQA9GSQLPqwyu1sqRHqL9dEA2NY/JRl/VhP5MqlLPa3FiCSatuGj04HiQvI1mZ598qBSbTIzwZN0.
+username suzie privilege 15 role network-admin secret sha512 $6$6zV.qw9F48hskMAL$DW01gDlj1MQbpeBfcLvN.wTVt.j1TTuDd1f7c91n6k5TDx41v5QNsdb7GAO9JyTZy4h1r3yA70Gfe8Jb4dBm01
+!
+vrf instance MGMT
+!
+interface Ethernet1
+   description connection to pdx-rtr-eos-03
+   no switchport
+   ip address 10.0.34.4/24
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
+!
+interface Ethernet2
+   no switchport
+   ip address 192.168.4.1/24
+   ip ospf area 0.0.0.0
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback1
+   ip address 10.0.0.4/32
+   ip ospf area 0.0.0.0
+!
+interface Management1
+   vrf MGMT
+   ip address 192.168.7.47/24
+!
+ip routing
+no ip routing vrf MGMT
+!
+ip route vrf MGMT 0.0.0.0/0 192.168.7.1
+!
+router bgp 65004
+   router-id 10.0.0.4
+   timers bgp 10 30
+   neighbor 10.0.0.1 remote-as 65001
+   neighbor 10.0.0.1 update-source Loopback1
+   neighbor 10.0.0.1 ebgp-multihop 3
+!
+router ospf 1
+   router-id 10.0.0.4
+   passive-interface Ethernet2
+   passive-interface Loopback1
+   max-lsa 12000
+!
+management api http-commands
+   no shutdown
+   !
+   vrf MGMT
+      no shutdown
+!
+end
