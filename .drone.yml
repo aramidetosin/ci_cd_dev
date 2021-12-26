@@ -30,3 +30,20 @@ trigger:
   event:
     exclude:
     - pull_request
+- name: Suzieq Check
+  image: python:3.8
+  commands:
+  - pip install suzieq rich
+  - python3 test_suzieq.py
+  when:
+    branch:
+    - master
+    - main
+  volumes:
+  - name: suzieq
+    path: /tmp/suz
+
+volumes:
+- name: suzieq
+  host:
+    path: /home/neteng/suz
