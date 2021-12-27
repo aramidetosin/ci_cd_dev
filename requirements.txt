@@ -7,3 +7,6 @@ pytest
 nornir
 nornir-utils
 nornir-napalm
+pyaoscx==1.0.0
+fastapi==0.68.1
+uvicorn==0.15.0

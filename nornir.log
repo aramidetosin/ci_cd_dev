@@ -1,1 +1,5 @@
 2021-12-26 03:37:52,960 -  nornir.core -     INFO -        run() - Running task 'deploy_network' with args {} on 4 hosts
+2021-12-27 04:11:06,169 -  nornir.core -  WARNING -        run() - Task 'Get 192.168.7.49 facts' has not been run – 0 hosts selected
+2021-12-27 04:12:15,503 -  nornir.core -     INFO -        run() - Running task 'Get pdx-rtr-eos-01 facts' with args {'getters': ['facts']} on 1 hosts
+2021-12-27 04:14:22,342 -  nornir.core -     INFO -        run() - Running task 'Get pdx-rtr-eos-01 interfaces_ip' with args {'getters': ['interfaces_ip']} on 1 hosts
+2021-12-27 04:24:48,544 -  nornir.core -     INFO -        run() - Running task 'Get pdx-rtr-eos-01 get_bgp_neighbors' with args {'getters': ['get_bgp_neighbors']} on 1 hosts
