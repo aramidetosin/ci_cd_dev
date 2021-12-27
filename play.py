@@ -10,6 +10,7 @@ from nornir_napalm.plugins.tasks import napalm_get
 from yaml import safe_load
 import urllib3
 from tools import nornir_set_creds
+
 # Disable warnings
 # If running into ArubaCX sessions full error or blank info
 # run the following at the console "https-server session close all"
@@ -19,12 +20,10 @@ nornir_set_creds(norn)
 app = FastAPI()
 
 
-
 @app.get("/")
 async def root():
     """Says hi!"""
     return {"message": "Hello JulioPDX"}
-
 
 
 @app.get("/devices")
@@ -35,9 +34,10 @@ async def get_devices():
     return {"devices": devices}
 
 
-
 @app.get("/devices/{hostname}/napalm_get/{getter}")
 async def get_config(hostname: str, getter: str):
     """Function used to interact with NAPALM and devices"""
     rtr = norn.filter(name=f"{hostname}")
-    return rtr.run(name=f"Get {hostname} {getter}", task=napalm_get, getters=[f"{getter}"])
+    return rtr.run(
+        name=f"Get {hostname} {getter}", task=napalm_get, getters=[f"{getter}"]
+    )
